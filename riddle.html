@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    input:focus{border: #1b1b1b solid 2px;}
+  </style>
+  <title>riddle</title>
+</head>
+<body style="background: #272626; color: rgba(216, 214, 214, 0.801); font-family: Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; zoom: 4.5">
+<p id="output"></p>
+<input type="text" id="input" onkeypress = "aufinput(event)" style="background: #272626; color: rgba(216, 214, 214, 0.801); font-family: Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; border: #1b1b1b solid 2px; ">
+
+<script>
+
+let pressed=false
+async function anhalten() {
+  while(true){
+        if (pressed)
+            break;
+            await new Promise(resolve => window.setTimeout(resolve, 10))
+    }
+    pressed=false
+}
+function aufinput(event) {
+    if (event.key !="Enter")
+        return;
+    pressed=true
+    
+}
+async function riddle(question, answer, right, wrong, c) {
+  var d, i;
+  i = 0;
+
+  while ( i===0) {
+    document.getElementById('output').innerText = question;
+    while(true){
+        if (pressed)
+            break;
+            await new Promise(resolve => window.setTimeout(resolve, 10))
+    }
+    pressed=false
+    d = document.getElementById('input').value;
+    console.log(d)
+    if (d.toLowerCase() === answer) {
+      document.getElementById('output').innerText = right;
+      while(true){
+        if (pressed)
+            break;
+            await new Promise(resolve => window.setTimeout(resolve, 10))
+    }
+    pressed=false
+      break;
+    } else {
+      document.getElementById('output').innerText = wrong;
+      while(true){
+        if (pressed)
+            break;
+            await new Promise(resolve => window.setTimeout(resolve, 10))
+    }
+    pressed=false
+    }
+  }
+}
+
+document.getElementById('output').innerText = "Hallo...\nIch hoffe du hast die Antworten f\u00fcr die 3 R\u00e4tsel...\n";
+(async () => {
+await riddle("Zweiunddrei\u00dfig Schimmel auf einem roten Hang...\nerst mahlen sie, dann stampfen Sie und warten wieder lang.", "z\u00e4hne", "Richtig! Es sind Z\u00e4hne!(Enter)", "FALSCH! Probier es noch einmal...(Enter)", 4);
+await riddle("Schreit ohne Stimme,fliegt ohne Schwinge,\n bei\u00dft ohne Zahn, \nmurmelt und pfeift, kein Mund hats getan", "wind", "WOOOOSH es ist der Wind! Richtig!(Enter)", "Falsch probier es noch einmal (Enter)", 4);
+await riddle("Was ist Blau wie das Meer und zugleich schwarz wie die Nacht \nImmer da doch niemals Nah und unfassbar schnell obwohl es sich nicht bewegt?", "himmel", "Exakt! hab ich mir selber ausgedacht :) (Enter)\n", "Falsch...(Enter)", 4);
+document.body.removeChild(document.getElementById('output'))
+document.body.removeChild(document.getElementById('input'))
+const embedee = document.createElement("div")
+embedee.innerHTML = '<iframe width="500" height="280" src="https://www.youtube.com/embed/OkaOf8FoxaM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
+document.body.appendChild(embedee)
+})();
+</script>
+</body>
+</html>
